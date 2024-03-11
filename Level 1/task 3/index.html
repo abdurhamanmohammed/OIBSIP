@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Temprature Converter</title>
+</head>
+<body>
+    <section class="temprature">
+        <div class="converter">
+            <h2>Temperature Converter</h2>
+            <label for="fromunit">From:</label>
+            <select id="fromunit">
+                <option  value="c">&#176 celsius</option>
+                <option value="f">&#176 fahrenheit </option>
+                <option value="k">kelvin</option>
+            </select>
+            <label for="tounit">To:</label>
+            <select id="tounit">
+                <option value="c">&#176 celsius </option>
+                <option value="f">&#176 fahrenheit </option>
+                <option value="k">kelvin</option>
+            </select>
+            <label for="temperature">Temperature</label>
+            <input type="number" id="temperature" placeholder="Enter Temperature">
+            <button onclick="convert()">convert</button>
+            <br>
+            <label class="result" for="result">Result:</label>
+            <input type="text" id="result" readonly>
+        </div>
+        
+    </section>
+    
+
+
+    <script>
+        function convert(){
+            const fromunit=document.getElementById("fromunit").value;
+            const tounit=document.getElementById("tounit").value;
+            const temperature=parseFloat(document.getElementById("temperature").value);
+            let convertedvalue;
+            let resultunit;
+
+            switch(fromunit){
+                case 'c':
+                    if(tounit==='f'){
+                        convertedvalue=(temperature*9/5)+32;
+                        resultunit=' \u00B0 f ';
+                    }else if(tounit==='k'){
+                        convertedvalue=temperature+273.15;
+                        resultunit='k '
+                    }else{
+                        convertedvalue=temperature;
+                        resultunit=' \u00B0 c';
+                    }
+                    break;
+                    case 'f':
+                    if(tounit==='c'){
+                        convertedvalue=(temperature-32)*5/9;
+                        resultunit=' \u00B0 c';
+                    }else if(tounit==='k'){
+                        convertedvalue=(temperature-32)*5/9+273.15;
+                        resultunit="k"
+                    }else{
+                        convertedvalue=temperature;
+                        resultunit=' \u00B0 f';
+                    }
+                    break;
+                    case 'k':
+                    if(tounit==='c'){
+                        convertedvalue=temperature-273.15;
+                        resultunit=' \u00B0 c';
+                    }else if(tounit==='f'){
+                        convertedvalue=(temperature-273.15)*9/5+32;
+                        resultunit=" \u00B0 f"
+                    }else{
+                        convertedvalue=temperature;
+                        resultunit='k';
+                    }
+                    break;
+            }
+            document.getElementById('result').value=convertedvalue.toFixed(2)+""+resultunit;
+        }
+    </script>
+</body>
+</html>
